@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>second-law-v2</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newton's Second Law</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+ 
+
+  <main class="page-body">
+    <div class="container">
+      <header class="page-header">
+        <h1 class="page-title">Newton's Second Law</h1>
+      
+      </header>
+
+      <section class="experiment-area">
+        <div class="cols">
+          <!-- Simulation Area -->
+          <div class="sim-area">
+            <div class="track" style="bottom:100px;"></div>
+
+            <div class="distance-markers" style="bottom:70px;">
+              <div class="marker"><div class="marker-line major"></div><span>0m</span></div>
+              <div class="marker"><div class="marker-line minor"></div><span>0.2m</span></div>
+              <div class="marker"><div class="marker-line minor"></div><span>0.4m</span></div>
+              <div class="marker"><div class="marker-line minor"></div><span>0.6m</span></div>
+              <div class="marker"><div class="marker-line minor"></div><span>0.8m</span></div>
+              <div class="marker"><div class="marker-line major"></div><span>1.0m</span></div>
+            </div>
+
+            <div class="finish-line" style="bottom:100px;"></div>
+
+            <div id="cartContainer" class="cart-container" style="bottom:104px; left:16px;">
+              <div id="cart" class="cart">
+                <svg width="80" height="60" viewBox="0 0 80 60" class="cart-svg">
+                  <rect x="5" y="10" width="70" height="30" rx="4" fill="#1ABC9C" stroke="#2C3E50" stroke-width="2"/>
+                  <circle cx="20" cy="50" r="8" fill="#2C3E50"/>
+                  <circle cx="60" cy="50" r="8" fill="#2C3E50"/>
+                  <text x="40" y="30" text-anchor="middle" fill="white" font-weight="bold" id="massDisplay">2.0 kg</text>
+                </svg>
+
+                <div id="forceArrow" class="force-arrow">
+                  <div class="force-arrow-line"></div>
+                  <div class="force-arrow-head"></div>
+                </div>
+              </div>
+            </div>
+
+            <div id="timerDisplay" class="badge timer">Time: 0.00 s</div>
+            <div id="velocityDisplay" class="badge velocity">Velocity: 0.00 m/s</div>
+          </div>
+
+          <!-- Controls Area -->
+          <aside class="controls">
+            <div class="control-group">
+              <label class="label">Mass (m)</label>
+              <div class="range-row">
+                <input type="range" id="massSlider" min="1.0" max="3.0" value="2.0" step="0.1" class="range">
+                <span id="massValue" class="value">2.0 kg</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="label">Force (F)</label>
+              <div class="range-row">
+                <input type="range" id="forceSlider" min="0.0" max="1.0" value="0.0" step="0.1" class="range">
+                <span id="forceValue" class="value coral">0.0 N</span>
+              </div>
+            </div>
+
+            <div class="button-stack">
+              <button id="startBtn" class="btn start">Start Experiment</button>
+              <button id="resetBtn" class="btn reset">Reset</button>
+            </div>
+          </aside>
+        </div>
+
+        <!-- Instructions Panel -->
+        <section class="panel instructions">
+          <h3>Experiment Instructions</h3>
+          <div class="panel-body">
+            <h4>Aim of the Experiment</h4>
+            <p>This simulation demonstrates Newton's Second Law of Motion: F = ma</p>
+
+            <h4>How to Use</h4>
+            <ol>
+              <li>You can adjust the mass of the trolley using the slider - keep this unchanged while gathering acceleration data</li>
+              <li>Apply a force of 0.1 N to the trolley and click "Start Experiment" to begin the simulation</li>
+              <li>The time taken for the trolley to travel 1 m and the final velocity of the trolley will be recorded</li>
+              <li>Enter your calculated value of acceleration in the table</li>
+              <li>Repeat three times and take an average</li>
+              <li>Increase the force by 0.1 N and repeat until at least 5 different forces have been used</li>
+              <li>You can gather more data for a trolley of a different mass</li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- Results Table -->
+        <section class="panel results">
+          <h3>Results</h3>
+          <div class="table-wrap">
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Mass (kg)</th>
+                  <th>Force (N)</th>
+                  <th>Time (s)</th>
+                  <th>Final Velocity (m/s)</th>
+                  <th>Your Calculated Acceleration (m/s²)</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="resultsTable"></tbody>
+            </table>
+          </div>
+
+          <div class="panel-footer">
+            <button id="clearResultsBtn" class="btn small soft coral-btn">Clear All Results</button>
+          </div>
+        </section>
+
+        <!-- Student Worksheet -->
+        <section class="panel worksheet">
+         
+
+          <div class="panel-body">
+            <h3>How to Calculate Acceleration:</h3>
+            <p>You can calculate acceleration using:</p>
+            <ul>
+              <li>acceleration = change in velocity / time</li>
+            </ul>
+          </div>
+          <br></br> <br></br>
+          <h3>Newton's Second Law</h3>
+          <div class="formula">
+            <div class="formula-pill coral">F</div>
+            <div class="formula-eq">=</div>
+            <div class="formula-pill teal">m</div>
+            <div class="formula-eq">×</div>
+            <div class="formula-pill gold">a</div>
+          </div>
+        </section>
+        
+
+      </section>
+    </div>
+  </main>
+
+  <script src="second-law-script.js"></script>
+</body>
+</html>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
